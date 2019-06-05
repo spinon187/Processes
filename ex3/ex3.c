@@ -10,6 +10,17 @@
 int main(void)
 {
     // Your code here
-
+    pid_t rc = fork();
+    if (rc == 0){
+        printf("hello\n");
+        exit(1);
+    }
+    else {
+        int status;
+        wait(&status);
+        if(WIFEXITED(status)){
+            printf("goodbye\n");
+        }
+    }
     return 0;
 }

@@ -8,7 +8,14 @@
 
 int main(void)
 {
-    // Your code here
+    int x = 5;
+    int parent = getpid();
+    fork();
+
+    if (parent != getpid()){
+        x = 100;
+    }
+    printf("pid: %d x: %d\n", (int) getpid(), x);
 
     return 0;
 }

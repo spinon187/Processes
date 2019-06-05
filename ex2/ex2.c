@@ -9,6 +9,9 @@
 int main(void)
 {
     // Your code here 
-    
+    FILE *text = fopen("text.txt", "w");
+    fork();
+    fputs("test", text);
+
     return 0;
 }
