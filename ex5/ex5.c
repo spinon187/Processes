@@ -17,6 +17,31 @@ char* msg3 = "hello world #3";
 int main(void)
 {
     // Your code here
+    char buffer[MSGSIZE];
+    int p[2];
+
+    if (pipe(p) < 0) {
+        fprintf(stderr, "pipe failed\n");
+        exit(2);
+    }
+
+    pid_t rc = fork();
+    if (rc == 0){
+        write(p[1], msg1, MSGSIZE);
+        write(p[1], msg2, MSGSIZE);
+        write(p[1], msg3, MSGSIZE);
+        exit(1);
+    }
+    else {
+        int status;
+        wait(&status);
+        if(WIFEXITED(status)){
+            close(p[1]);
+            while (read(p[0], buffer, MSGSIZE) > 0){
+                printf("%s\n", buffer);
+            }
+        }
+    }
     
     return 0;
 }
