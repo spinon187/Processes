@@ -10,7 +10,12 @@
 
 int main(void)
 {
-    // Your code here    
+    // Your code here
+    char *args[2];
+    args[0] = "ls";
+    args[1] = NULL;
+    fork();
+    execvp(args[0], args);
 
     return 0;
 }
